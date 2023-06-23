@@ -4,6 +4,7 @@ import * as fs from "node:fs/promises";
 import * as path from "path";
 import * as exec from "@actions/exec";
 import * as cache from "@actions/cache";
+import * as core from "@actions/core";
 import * as platform from "./platform";
 
 function existsFile(path: string): Promise<boolean> {
@@ -64,6 +65,7 @@ export async function bundleInstall() {
     cacheOptions.primaryKey,
     cacheOptions.restoreKeys
   );
+  core.info(`cache hit: ${cacheHit}`);
 
   await exec.exec("bundle", ["install"], execOptions);
 

@@ -58544,6 +58544,7 @@ const fs = __importStar(__nccwpck_require__(3977));
 const path = __importStar(__nccwpck_require__(1017));
 const exec = __importStar(__nccwpck_require__(1514));
 const cache = __importStar(__nccwpck_require__(7799));
+const core = __importStar(__nccwpck_require__(2186));
 const platform = __importStar(__nccwpck_require__(2999));
 function existsFile(path) {
     return fs
@@ -58580,6 +58581,7 @@ function bundleInstall() {
             restoreKeys: [baseKey],
         };
         const cacheHit = yield cache.restoreCache(cacheOptions.paths, cacheOptions.primaryKey, cacheOptions.restoreKeys);
+        core.info(`cache hit: ${cacheHit}`);
         yield exec.exec("bundle", ["install"], execOptions);
         if (cacheHit !== cacheOptions.primaryKey) {
             yield cache.saveCache(cacheOptions.paths, cacheOptions.primaryKey);
