@@ -58579,7 +58579,9 @@ function bundleInstall() {
             primaryKey: `${baseKey}-${lockfileHash}`,
             restoreKeys: [baseKey],
         };
-        const cacheHit = yield cache.restoreCache(cacheOptions.paths, cacheOptions.primaryKey, cacheOptions.restoreKeys);
+        const cacheHit = yield cache.restoreCache(
+        // https://github.com/actions/toolkit/issues/1377
+        cacheOptions.paths.slice(), cacheOptions.primaryKey, cacheOptions.restoreKeys);
         yield exec.exec("bundle", ["install"], execOptions);
         if (cacheHit !== cacheOptions.primaryKey) {
             yield cache.saveCache(cacheOptions.paths, cacheOptions.primaryKey);
