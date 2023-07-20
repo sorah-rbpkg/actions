@@ -60,7 +60,8 @@ export async function bundleInstall() {
   };
 
   const cacheHit = await cache.restoreCache(
-    cacheOptions.paths,
+    // https://github.com/actions/toolkit/issues/1377
+    cacheOptions.paths.slice(),
     cacheOptions.primaryKey,
     cacheOptions.restoreKeys
   );
