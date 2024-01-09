@@ -22,12 +22,8 @@ steps:
   - run: ruby app.rb
 ```
 
-Only the following versions are supported. Specify it as a string.
+Packages with Ruby 2.7 or later are supported. Specify it as a string.
 
-- `2.7`
-- `3.0`
-- `3.1`
-- `3.2`
 
 ### `.ruby-version` file support
 
