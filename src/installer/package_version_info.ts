@@ -21,6 +21,10 @@ const DebPackageVersionMap = {
     rubyVersion: "3.2",
     defaultsPackageVersionPrefix: "1:3.2+0nkmi1~",
   },
+  "3.3": {
+    rubyVersion: "3.3",
+    defaultsPackageVersionPrefix: "1:3.3+0nkmi1~",
+  },
 };
 
 export type RubyVersion = keyof typeof DebPackageVersionMap;

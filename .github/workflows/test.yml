@@ -10,7 +10,7 @@ jobs:
       fail-fast: false
       matrix:
         runner: [ubuntu-20.04, ubuntu-22.04]
-        version: ["3.0", "3.1", "3.2"]
+        version: ["3.0", "3.1", "3.2", "3.3"]
     runs-on: ["${{ matrix.runner }}"]
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +28,7 @@ jobs:
       fail-fast: false
       matrix:
         runner: [ubuntu-20.04, ubuntu-22.04]
-        version: ["3.0.5", "3.1.3", "3.2.1"]
+        version: ["3.0.5", "3.1.3", "3.2.1", "3.3.0"]
     runs-on: ["${{ matrix.runner }}"]
     steps:
       - uses: actions/checkout@v4
@@ -45,7 +45,7 @@ jobs:
       fail-fast: false
       matrix:
         runner: [ubuntu-20.04, ubuntu-22.04]
-        version: ["3.0", "3.1", "3.2"]
+        version: ["3.0", "3.1", "3.2", "3.3"]
         testcase: [with_lockfile]
     runs-on: ["${{ matrix.runner }}"]
     steps:
@@ -65,7 +65,7 @@ jobs:
       fail-fast: false
       matrix:
         runner: [ubuntu-20.04, ubuntu-22.04]
-        version: ["3.0", "3.1", "3.2"]
+        version: ["3.0", "3.1", "3.2", "3.3"]
         testcase: [with_lockfile]
     runs-on: ["${{ matrix.runner }}"]
     steps:
