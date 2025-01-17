@@ -24,6 +24,7 @@ steps:
 
 Packages with Ruby 2.7 or later are supported. Specify it as a string.
 
+Note: Ruby >= 3.4 on the ubuntu-20.04 runner is not supported.
 
 ### `.ruby-version` file support
 
