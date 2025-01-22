@@ -12,7 +12,7 @@ jobs:
         runner: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
         version: ["3.0", "3.1", "3.2", "3.3", "3.4"]
         exclude:
-          - os: ubuntu-20.04
+          - runner: ubuntu-20.04
             version: "3.4"
     runs-on: ["${{ matrix.runner }}"]
     steps:
@@ -33,7 +33,7 @@ jobs:
         runner: [ubuntu-20.04, ubuntu-22.04, ubuntu-24.04]
         version: ["3.0.5", "3.1.3", "3.2.1", "3.3.0", "3.4.1"]
         exclude:
-          - os: ubuntu-20.04
+          - runner: ubuntu-20.04
             version: "3.4"
     runs-on: ["${{ matrix.runner }}"]
     steps:
@@ -54,7 +54,7 @@ jobs:
         version: ["3.0", "3.1", "3.2", "3.3", "3.4"]
         testcase: [with_lockfile]
         exclude:
-          - os: ubuntu-20.04
+          - runner: ubuntu-20.04
             version: "3.4"
             testcase: "with_lockfile"
     runs-on: ["${{ matrix.runner }}"]
@@ -78,7 +78,7 @@ jobs:
         version: ["3.0", "3.1", "3.2", "3.3", "3.4"]
         testcase: [with_lockfile]
         exclude:
-          - os: ubuntu-20.04
+          - runner: ubuntu-20.04
             version: "3.4"
             testcase: "with_lockfile"
     runs-on: ["${{ matrix.runner }}"]
