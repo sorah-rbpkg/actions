@@ -28,8 +28,11 @@ jobs:
 
       - run: |
           ruby --version | grep '^ruby ${{ matrix.version }}'
-          dpkg -l 'ruby' | grep 'ii'
+          dpkg -l 'ruby' | grep 'ii' | grep '${{ matrix.version}}'
           dpkg -l 'ruby${{ matrix.version }}' | grep 'ii'
+          dpkg -l 'libruby${{ matrix.version}}' | grep 'ii'
+        shell: bash
+
   patch:
     strategy:
       fail-fast: false
@@ -53,6 +56,7 @@ jobs:
 
       - run: |
           ruby --version | grep '^ruby ${{ matrix.version }}'
+        shell: bash
 
   ruby-version-file:
     strategy:
@@ -83,6 +87,7 @@ jobs:
           ruby --version | grep '^ruby ${{ matrix.version }}'
           dpkg -l 'ruby' | grep 'ii'
           dpkg -l 'ruby${{ matrix.version }}' | grep 'ii'
+        shell: bash
 
   bundle-cache:
     strategy:
