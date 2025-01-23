@@ -10,8 +10,10 @@ sudo install -D -m0644 -oroot -groot $(dirname ${0})/sorah-ruby.gpg /usr/local/s
 echo "deb [signed-by=/usr/local/share/keyrings/sorah-ruby.gpg] https://cache.ruby-lang.org/lab/sorah/deb/ ${CODENAME} main" | \
     sudo tee /etc/apt/sources.list.d/sorah-ruby.list
 
-echo "Package: src:ruby-defaults\nPin: version $DEFAULTS_PACKAGE_VERSION\nPin-Priority: 999" | \
+echo -e "Package: src:ruby-defaults\nPin: version ${DEFAULTS_PACKAGE_VERSION}\nPin-Priority: 999" | \
     sudo tee /etc/apt/preferences.d/91-sorah-rbpkg-ruby-defaults
+echo -e "\nPackage: src:ruby${RUBY_VERSION}\nPin: version ${RUBY_PACKAGE_VERSION}\nPin-Priority: 999" | \
+    sudo tee -a /etc/apt/preferences.d/91-sorah-rbpkg-ruby-defaults
 
 sudo apt-get update
 sudo apt-get install -y --no-install-recommends \
