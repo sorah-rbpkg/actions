@@ -1,7 +1,7 @@
 #!/bin/bash -eux
 
 # The GitHub hosted runners come with the ruby package installed by default, so trying to install the ruby package with this action will cause a conflict.
-sudo apt-get purge ruby || true
+sudo apt-get purge -y ruby || true
 
 sudo apt-get update
 sudo apt-get install -y ca-certificates
