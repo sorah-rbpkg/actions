@@ -81983,15 +81983,6 @@ const path = __importStar(__nccwpck_require__(9411));
 const exec = __importStar(__nccwpck_require__(1514));
 const platform = __importStar(__nccwpck_require__(2999));
 const package_version_info_1 = __nccwpck_require__(3615);
-function removePatchVersion(rubyVersionText) {
-    const matches = rubyVersionText.match(/^(\d+\.\d+)\.\d+$/);
-    if (matches != null) {
-        return matches[1];
-    }
-    else {
-        return rubyVersionText;
-    }
-}
 function apt_install(platformInfo, info) {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
@@ -82007,12 +81998,8 @@ function apt_install(platformInfo, info) {
 }
 function installRuby(rubyVersionText, rubyPackageVersion) {
     return __awaiter(this, void 0, void 0, function* () {
-        const rubyVersionWithoutPatchVersion = removePatchVersion(rubyVersionText);
-        if (!(0, package_version_info_1.validateRubyVersionText)(rubyVersionWithoutPatchVersion)) {
-            throw new Error(`Invalid version text: ${rubyVersionText}`);
-        }
         const platformInfo = yield platform.read();
-        const packageVersionInfo = yield (0, package_version_info_1.buildPackageVersionInfo)(platformInfo.codename, rubyVersionWithoutPatchVersion, rubyPackageVersion !== null && rubyPackageVersion !== void 0 ? rubyPackageVersion : rubyVersionText + "*");
+        const packageVersionInfo = yield (0, package_version_info_1.buildPackageVersionInfo)(platformInfo.codename, rubyVersionText, rubyPackageVersion);
         yield apt_install(platformInfo, packageVersionInfo);
     });
 }
@@ -82027,43 +82014,61 @@ exports.installRuby = installRuby;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.buildPackageVersionInfo = exports.validateRubyVersionText = void 0;
+exports.buildPackageVersionInfo = void 0;
 const DebPackageVersionMap = {
     "2.7": {
         rubyVersion: "2.7",
         defaultsPackageVersionPrefix: "1:2.7.0+0nkmi2~",
+        rubyPackageVersionPatternMiddle: "*-0nkmi1~",
     },
     "3.0": {
         rubyVersion: "3.0",
         defaultsPackageVersionPrefix: "1:3.0.0+0nkmi1~",
+        rubyPackageVersionPatternMiddle: "*-0nkmi1~",
     },
     "3.1": {
         rubyVersion: "3.1",
         defaultsPackageVersionPrefix: "1:3.1.0+0nkmi1~",
+        rubyPackageVersionPatternMiddle: "*-0nkmi1~",
     },
     "3.2": {
         rubyVersion: "3.2",
         defaultsPackageVersionPrefix: "1:3.2+0nkmi1~",
+        rubyPackageVersionPatternMiddle: "*-0nkmi1~",
     },
     "3.3": {
         rubyVersion: "3.3",
         defaultsPackageVersionPrefix: "1:3.3+0nkmi1~",
+        rubyPackageVersionPatternMiddle: "*-0nkmi1~",
     },
     "3.4": {
         rubyVersion: "3.4",
         defaultsPackageVersionPrefix: "1:3.4+0nkmi1~",
+        rubyPackageVersionPatternMiddle: "*-0nkmi1~",
     },
 };
+function removePatchVersion(rubyVersionText) {
+    const matches = rubyVersionText.match(/^(\d+\.\d+)\.\d+$/);
+    if (matches != null) {
+        return matches[1];
+    }
+    else {
+        return rubyVersionText;
+    }
+}
 function validateRubyVersionText(value) {
     return Object.keys(DebPackageVersionMap).includes(value);
 }
-exports.validateRubyVersionText = validateRubyVersionText;
-function buildPackageVersionInfo(codename, rubyVersion, rubyPackageVersion) {
-    const template = DebPackageVersionMap[rubyVersion];
+function buildPackageVersionInfo(codename, rubyVersionText, rubyPackageVersion) {
+    const rubyVersionWithoutPatchVersion = removePatchVersion(rubyVersionText);
+    if (!validateRubyVersionText(rubyVersionWithoutPatchVersion)) {
+        throw new Error(`Invalid version text: ${rubyVersionText}`);
+    }
+    const template = DebPackageVersionMap[rubyVersionWithoutPatchVersion];
     return {
         rubyVersion: template.rubyVersion,
         defaultsPackageVersion: template.defaultsPackageVersionPrefix + codename,
-        rubyPackageVersion,
+        rubyPackageVersion: rubyPackageVersion !== null && rubyPackageVersion !== void 0 ? rubyPackageVersion : rubyVersionText + template.rubyPackageVersionPatternMiddle + codename
     };
 }
 exports.buildPackageVersionInfo = buildPackageVersionInfo;

@@ -5,17 +5,7 @@ import * as platform from "../platform";
 import {
   PackageVersionInfo,
   buildPackageVersionInfo,
-  validateRubyVersionText,
 } from "./package_version_info";
-
-function removePatchVersion(rubyVersionText: string) {
-  const matches = rubyVersionText.match(/^(\d+\.\d+)\.\d+$/);
-  if (matches != null) {
-    return matches[1];
-  } else {
-    return rubyVersionText;
-  }
-}
 
 async function apt_install(
   platformInfo: platform.PlatformInfo,
@@ -35,16 +25,11 @@ export async function installRuby(
   rubyVersionText: string,
   rubyPackageVersion: string | null
 ) {
-  const rubyVersionWithoutPatchVersion = removePatchVersion(rubyVersionText);
-  if (!validateRubyVersionText(rubyVersionWithoutPatchVersion)) {
-    throw new Error(`Invalid version text: ${rubyVersionText}`);
-  }
-
   const platformInfo = await platform.read();
   const packageVersionInfo = await buildPackageVersionInfo(
     platformInfo.codename,
-    rubyVersionWithoutPatchVersion,
-    rubyPackageVersion ?? rubyVersionText + "*"
+    rubyVersionText,
+    rubyPackageVersion
   );
   await apt_install(platformInfo, packageVersionInfo);
 }

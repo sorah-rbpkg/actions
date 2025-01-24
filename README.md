@@ -24,7 +24,7 @@ steps:
 
 Packages with Ruby 2.7 or later are supported. Specify it as a string.
 
-Note: Ruby >= 3.4 on the ubuntu-20.04 runner is not supported.
+Note: Older Ruby versions are only available on older Ubuntu, and newer Ruby versions are only available on newer Ubuntu. The support matrix is roughly outlined in <https://github.com/sorah/config/blob/master/etc/debian-packages.txt>, but there're exceptions for some teeny versions.
 
 ### `.ruby-version` file support
 
