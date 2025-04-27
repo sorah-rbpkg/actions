@@ -13,7 +13,7 @@
   "author": "kosuke-urakawa",
   "license": "MIT",
   "dependencies": {
-    "@actions/cache": "^3.2.2",
+    "@actions/cache": "^4.0.3",
     "@actions/core": "^1.10.1",
     "@actions/exec": "^1.1.1"
   },
