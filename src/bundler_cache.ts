@@ -79,5 +79,5 @@ async function buildBaseKey(
   bundleWith: string,
   bundleWithout: string
 ) {
-  return `sorah-rbpkg-actions-bundler-cache-v1-${await platform.text()}-cwd-${cwd}-bundler-${bundlerVersion}-with-${bundleWith}-without-${bundleWithout}`;
+  return `sorah-rbpkg-actions-bundler-cache-v2-${await platform.text()}-cwd-${cwd}-bundler-${bundlerVersion}-with-${bundleWith}-without-${bundleWithout}`;
 }
