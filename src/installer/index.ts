@@ -9,7 +9,7 @@ import {
 
 async function apt_install(
   platformInfo: platform.PlatformInfo,
-  info: PackageVersionInfo
+  info: PackageVersionInfo,
 ) {
   await exec.exec(path.join(__dirname, "../apt_install.sh"), [], {
     env: {
@@ -23,13 +23,13 @@ async function apt_install(
 
 export async function installRuby(
   rubyVersionText: string,
-  rubyPackageVersion: string | null
+  rubyPackageVersion: string | null,
 ) {
   const platformInfo = await platform.read();
   const packageVersionInfo = await buildPackageVersionInfo(
     platformInfo.codename,
     rubyVersionText,
-    rubyPackageVersion
+    rubyPackageVersion,
   );
   await apt_install(platformInfo, packageVersionInfo);
 }

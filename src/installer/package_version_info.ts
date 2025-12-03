@@ -55,17 +55,19 @@ function validateRubyVersionText(value: string): value is RubyVersion {
 export function buildPackageVersionInfo(
   codename: string,
   rubyVersionText: string,
-  rubyPackageVersion: string | null
+  rubyPackageVersion: string | null,
 ): PackageVersionInfo {
   const rubyVersionWithoutPatchVersion = removePatchVersion(rubyVersionText);
   if (!validateRubyVersionText(rubyVersionWithoutPatchVersion)) {
     throw new Error(`Invalid version text: ${rubyVersionText}`);
   }
-  
+
   const template = DebPackageVersionMap[rubyVersionWithoutPatchVersion];
   return {
     rubyVersion: template.rubyVersion,
     defaultsPackageVersion: template.defaultsPackageVersionPrefix + codename,
-    rubyPackageVersion: rubyPackageVersion ?? rubyVersionText + template.rubyPackageVersionPatternMiddle + codename
+    rubyPackageVersion:
+      rubyPackageVersion ??
+      rubyVersionText + template.rubyPackageVersionPatternMiddle + codename,
   };
 }
