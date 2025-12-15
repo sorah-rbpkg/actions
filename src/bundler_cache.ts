@@ -28,17 +28,17 @@ export async function bundleInstall() {
   await exec.exec(
     "bundle",
     ["config", "--local", "path", path.join(process.cwd(), bundleConfigPath)],
-    execOptions
+    execOptions,
   );
   await exec.exec(
     "bundle",
     ["config", "--local", "deployment", "true"],
-    execOptions
+    execOptions,
   );
   await exec.exec(
     "bundle",
     ["config", "--local", "clean", "true"],
-    execOptions
+    execOptions,
   );
 
   const lockfilePath = await inferLockfilePath();
@@ -50,7 +50,7 @@ export async function bundleInstall() {
     process.cwd(),
     process.env.BUNDLER_VERSION || "",
     process.env.BUNDLE_WITH || "",
-    process.env.BUNDLE_WITHOUT || ""
+    process.env.BUNDLE_WITHOUT || "",
   );
   const lockfileHash = await fs.readFile(lockfilePath).then(hash);
   const cacheOptions = {
@@ -63,7 +63,7 @@ export async function bundleInstall() {
     // https://github.com/actions/toolkit/issues/1377
     cacheOptions.paths.slice(),
     cacheOptions.primaryKey,
-    cacheOptions.restoreKeys
+    cacheOptions.restoreKeys,
   );
 
   await exec.exec("bundle", ["install"], execOptions);
@@ -77,7 +77,7 @@ async function buildBaseKey(
   cwd: string,
   bundlerVersion: string,
   bundleWith: string,
-  bundleWithout: string
+  bundleWithout: string,
 ) {
   return `sorah-rbpkg-actions-bundler-cache-v2-${await platform.text()}-cwd-${cwd}-bundler-${bundlerVersion}-with-${bundleWith}-without-${bundleWithout}`;
 }

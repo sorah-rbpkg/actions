@@ -13,8 +13,12 @@ async function run(): Promise<void> {
     if (input.bundlerCache) {
       await bundlerCache.bundleInstall();
     }
-  } catch (error: any) {
-    core.setFailed(error.message);
+  } catch (error) {
+    if (error instanceof Error) {
+      core.setFailed(error.message);
+    } else {
+      core.setFailed(String(error));
+    }
   }
 }
 

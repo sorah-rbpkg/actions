@@ -33,7 +33,7 @@ function readRubyVersion() {
     };
   } else if (rubyVersion != null && rubyVersionFile != null) {
     throw new Error(
-      "invalid input, input is mutually exclusive: ruby-version, ruby-version-file"
+      "invalid input, input is mutually exclusive: ruby-version, ruby-version-file",
     );
   } else {
     return unreachable();
