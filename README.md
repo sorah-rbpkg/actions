@@ -15,10 +15,10 @@ You can specify the Ruby version in the input `ruby-version`.
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: sorah-rbpkg/actions@v2
+  - uses: actions/checkout@v6
+  - uses: sorah-rbpkg/actions@v3
     with:
-      ruby-version: "3.2"
+      ruby-version: "3.4"
   - run: ruby app.rb
 ```
 
@@ -33,8 +33,8 @@ Specifying `ruby-version-file` behaves the same as specifying `ruby-version` wit
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: sorah-rbpkg/actions@v2
+  - uses: actions/checkout@v6
+  - uses: sorah-rbpkg/actions@v3
     with:
       ruby-version-file: .ruby-version
   - run: ruby app.rb
@@ -44,8 +44,8 @@ If you want to specify `.ruby-version` in `ruby-version-file`, you can omit the 
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: sorah-rbpkg/actions@v2
+  - uses: actions/checkout@v6
+  - uses: sorah-rbpkg/actions@v3
   - run: ruby app.rb
 ```
 
@@ -56,8 +56,8 @@ To use this feature, you need to pre-generate Gemfile.lock and commit it to your
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: sorah-rbpkg/actions@v2
+  - uses: actions/checkout@v6
+  - uses: sorah-rbpkg/actions@v3
     with:
       bundler-cache: true
   - run: bundle exec ruby app.rb
@@ -69,8 +69,8 @@ You can explicitly specify the Ruby package version using the input `ruby-packag
 
 ```yaml
 steps:
-  - uses: actions/checkout@v4
-  - uses: sorah-rbpkg/actions@v2
+  - uses: actions/checkout@v6
+  - uses: sorah-rbpkg/actions@v3
     with:
       ruby-version: "3.1"
       ruby-package-version: 3.1.3-0nkmi1~jammy
